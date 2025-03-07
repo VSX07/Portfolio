@@ -66,11 +66,11 @@ const Services=()=>{
             <motion.div className="box" whileHover={{background:"lightgray",color:"black"}}>
                 <h2>DSA</h2>
                 <p>
-                I have completed more than 200  <br />
+                I have completed more than 250  <br />
                 questions on leetcode.
                 </p>
               
-                <button onClick={() => window.open('https://leetcode.com/u/vivek10252510', '_blank')}>G0</button>
+                <button onClick={() => window.open('https://leetcode.com/u/VSX07/', '_blank')}>G0</button>
             </motion.div>
         </motion.div>
         </motion.div>

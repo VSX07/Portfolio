@@ -7,21 +7,21 @@ const items=[
         title:"My Github Profile",
         img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-tvx2BFjpYmfiIBLV25XIfVZy4KhCYFLB7w&s",
         desc:"Explore my repositories on data structures, algorithms, and other projects. ",
-        url:"https://github.com/vivekkgithubbb",
+        url:"https://github.com/VSX07",
     },
     {
         id: 2,
         title: "Portfolio Project",
         img: "https://images.pexels.com/photos/17443857/pexels-photo-17443857/free-photo-of-a-book-store-with-many-books-on-shelves.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
         desc: "My personal portfolio showcasing various projects.",
-        url: "https://github.com/vivekkgithubbb/Portfolio-Project"
+        url: "https://github.com/VSX07/Portfolio-Project"
     },
     {
         id: 3,
         title: "Data Structures and Algorithms",
         img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4KBLbzVhnZz_i3EFmbM1rLIoydeFxMq7ATQ&s",
         desc: "A collection of various data structures and algorithms.",
-        url: "https://github.com/vivekkgithubbb/-trees-and-graphs-implementations-"
+        url: "https://github.com/VSX07/-trees-and-graphs-implementations-"
        
     },
 ];
