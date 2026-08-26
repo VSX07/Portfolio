@@ -1,37 +1,77 @@
 import "./parallax.scss";
-import { useRef } from "react";
-import {motion,useScroll,useTransform} from "framer-motion";
+import { motion } from "framer-motion";
 
-const Parallax=({type})=>{
-    const ref=useRef()
-    const {scrollYProgress}=useScroll({
-        target:ref,
-        offset:["start start","end start"]
-    });
-    const yText=useTransform(scrollYProgress,[0,1],["0%","500%"]);
-    const yBg=useTransform(scrollYProgress,[0,1],["0%","100%"]);
+const skillCategories = [
+  {
+    title: "Languages",
+    skills: ["JavaScript", "TypeScript", "C", "C++", "HTML", "CSS"],
+  },
+  {
+    title: "Backend & APIs",
+    skills: ["Node.js", "Express.js", "REST API Design", "JWT Auth", "System Design"],
+  },
+  {
+    title: "Data",
+    skills: ["MongoDB", "MySQL", "SQL/NoSQL Modeling", "Query Optimization"],
+  },
+  {
+    title: "Cloud & Tools",
+    skills: ["AWS Fundamentals", "Git", "GitHub", "Postman", "VS Code", "npm"],
+  },
+  {
+    title: "Core Competencies",
+    skills: ["DSA", "Distributed Systems", "Problem Solving", "Cross-Functional Collaboration"],
+  },
+];
 
-    return (
-        <div className="parallax" 
-         ref={ref}
-        style={{background:
-            type==="services"
-            ? "linear-gradient(180deg , #111132, #0c0c1d)"
-            : "linear-gradient(100deg,#111132,#505064)",
-        }}>
-            <motion.h1 style={{y:yText}}>{type==="services" ? "See My Work?":"what I did?"}</motion.h1>
-            <motion.div className="mountains"></motion.div>
-            <motion.div className="planet" 
-            style={{
-                y:yBg,
-                backgroundImage:`url(${
-                    type==="services" ? "/planets.png" : "/sun.png"
-                })`,
-            }} 
-            ></motion.div>
-            <motion.div style={{x:yBg}} className="star"> </motion.div>
-        </div>
-    )
-}
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
+};
 
-export default Parallax;
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+const Skills = () => {
+  return (
+    <div className="skills-section">
+      <div className="section-container">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+        >
+          <motion.span className="section-label" variants={itemVariants}>
+            Tech Stack
+          </motion.span>
+          <motion.h2 className="section-title" variants={itemVariants}>
+            Skills & Technologies
+          </motion.h2>
+
+          <div className="skills-grid">
+            {skillCategories.map((cat, i) => (
+              <motion.div className="skill-category" key={i} variants={itemVariants}>
+                <h3>{cat.title}</h3>
+                <div className="skill-tags">
+                  {cat.skills.map((skill, j) => (
+                    <span className="skill-tag" key={j}>
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
+export default Skills;

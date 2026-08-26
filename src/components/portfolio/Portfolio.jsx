@@ -1,75 +1,124 @@
 import "./portfolio.scss";
-import {motion,useScroll,useSpring,useTransform} from "framer-motion";
-import {useRef} from "react";
-const items=[
-    {
-        id:1,
-        title:"My Github Profile",
-        img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-tvx2BFjpYmfiIBLV25XIfVZy4KhCYFLB7w&s",
-        desc:"Explore my repositories on data structures, algorithms, and other projects. ",
-        url:"https://github.com/VSX07",
-    },
-    {
-        id: 2,
-        title: "Portfolio Project",
-        img: "https://images.pexels.com/photos/17443857/pexels-photo-17443857/free-photo-of-a-book-store-with-many-books-on-shelves.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-        desc: "My personal portfolio showcasing various projects.",
-        url: "https://github.com/VSX07/Portfolio-Project"
-    },
-    {
-        id: 3,
-        title: "Data Structures and Algorithms",
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4KBLbzVhnZz_i3EFmbM1rLIoydeFxMq7ATQ&s",
-        desc: "A collection of various data structures and algorithms.",
-        url: "https://github.com/VSX07/-trees-and-graphs-implementations-"
-       
-    },
+import { motion } from "framer-motion";
+
+const projects = [
+  {
+    id: 1,
+    title: "VirtualCourtroom Platform",
+    tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Gemini AI", "Pinecone"],
+    description:
+      "AI-powered platform supporting multi-round, stateful debate sessions with a RAG pipeline using vector embeddings for low-latency semantic retrieval.",
+    points: [
+      "Built Retrieval-Augmented Generation (RAG) pipeline using vector embeddings and Pinecone",
+      "Designed data models and API contracts to persist argument history and session state",
+      "Built secure backend systems using JWT authentication and optimized MongoDB schemas",
+    ],
+    url: "https://github.com/VSX07",
+  },
+  {
+    id: 2,
+    title: "Event Management System",
+    tech: ["React.js", "React Native", "Node.js", "MongoDB"],
+    description:
+      "Cross-platform event management system handling user roles and concurrent registrations at scale, with web and mobile clients.",
+    points: [
+      "Designed REST APIs to handle user roles and concurrent registrations at scale",
+      "Implemented role-based access control (RBAC) and optimized database schema",
+      "Ensured data consistency across web and mobile clients through careful API and state design",
+    ],
+    url: "https://github.com/VSX07",
+  },
 ];
-const Single=({item})=>{
 
-    const ref=useRef();
-    const {scrollYProgress}=useScroll({target:ref,});
-    const y=useTransform(scrollYProgress,[0,1],[-300,300]);
-    const handleButton = () => {
-        window.location.href = item.url;
-    };
-    return (
-        <section >
-            <div className="container">
-            <div className="wrapper">
-            <div className="imagecontainer" ref={ref} >
-        <img src={item.img} alt=""/>
-        </div>
-        <motion.div className="textContainer" style={{y}}>
-           <h2>{item.title}</h2>
-           <p>{item.desc}</p>
-           <button onClick={handleButton}>Go</button>
-        </motion.div>
-        </div>
-        </div>
-      </section>
-    );
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2 },
+  },
 };
 
-const Portfolio=()=>{
-    const ref=useRef();
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
 
-    const {scrollYProgress}=useScroll({target:ref,offset:["end end","start start"]});
-    const scaleX=useSpring(scrollYProgress,{
-          damping:40,
-    });
-    return(
-        <div className="portfolio" ref={ref}>
-            <div className="progress">
-                <h1>Featured Works</h1>
-                <motion.div style={{ scaleX }} className="progressBar"></motion.div>
-            </div>
-            {items.map((item)=>(
-               <Single item={item} key={item.id}/>
+const Portfolio = () => {
+  return (
+    <div className="projects-section">
+      <div className="section-container">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+        >
+          <motion.span className="section-label" variants={itemVariants}>
+            Projects
+          </motion.span>
+          <motion.h2 className="section-title" variants={itemVariants}>
+            Featured Work
+          </motion.h2>
+
+          <div className="projects-grid">
+            {projects.map((project) => (
+              <motion.div className="project-card" key={project.id} variants={itemVariants}>
+                <div className="project-top">
+                  <div className="project-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                    </svg>
+                  </div>
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-link"
+                    aria-label="View project"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                      <polyline points="15 3 21 3 21 9"/>
+                      <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                  </a>
+                </div>
+
+                <h3>{project.title}</h3>
+                <p className="project-desc">{project.description}</p>
+
+                <ul className="project-points">
+                  {project.points.map((point, j) => (
+                    <li key={j}>{point}</li>
+                  ))}
+                </ul>
+
+                <div className="project-tech">
+                  {project.tech.map((t, j) => (
+                    <span key={j}>{t}</span>
+                  ))}
+                </div>
+              </motion.div>
             ))}
-        </div>
-    );
-};
+          </div>
 
+          <motion.div className="projects-cta" variants={itemVariants}>
+            <a
+              href="https://github.com/VSX07"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cta-link"
+            >
+              View all projects on GitHub
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+          </motion.div>
+        </motion.div>
+      </div>
+    </div>
+  );
+};
 
 export default Portfolio;

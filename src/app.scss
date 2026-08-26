@@ -1,23 +1,99 @@
-html{
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #111118;
+  --bg-card: #16161f;
+  --bg-card-hover: #1c1c28;
+  --text-primary: #f0f0f5;
+  --text-secondary: #9494a8;
+  --text-muted: #6b6b80;
+  --accent: #6366f1;
+  --accent-light: #818cf8;
+  --accent-glow: rgba(99, 102, 241, 0.15);
+  --border: rgba(255, 255, 255, 0.06);
+  --border-hover: rgba(255, 255, 255, 0.12);
+  --gradient-1: linear-gradient(135deg, #6366f1, #8b5cf6);
+  --gradient-2: linear-gradient(135deg, #06b6d4, #6366f1);
+  --radius: 16px;
+  --radius-sm: 8px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: "DM  Sans",sans-serif;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-body{
-    background-color:#0c0c1d;
-    color:lightgray;
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) var(--bg-secondary);
 }
-section{
-    height: 100vh;
-    scroll-snap-align: center;
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-@mixin mobile{
-    @media(max-width:738px){
-        @content;
-    }
+
+::selection {
+  background: var(--accent);
+  color: white;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+@mixin mobile {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: 1024px) {
+    @content;
+  }
+}
+
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  margin-bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 2px;
+    background: var(--gradient-1);
+    border-radius: 2px;
+  }
+}
+
+.section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 48px;
+  color: var(--text-primary);
 }
