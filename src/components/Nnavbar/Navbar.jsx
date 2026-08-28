@@ -29,6 +29,7 @@ const Navbar = () => {
     >
       <div className="nav-container">
         <a href="#home" className="logo">
+          <img src="/profile.jpg" alt="Vivek Singh" className="logo-avatar" />
           <span className="logo-bracket">&lt;</span>
           VS
           <span className="logo-bracket">/&gt;</span>
